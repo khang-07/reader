@@ -1,4 +1,4 @@
-use::epub::doc::EpubDoc;
+use epub::doc::EpubDoc;
 use html_parser::{Dom, Result};
 use serde_json;
 
