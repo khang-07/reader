@@ -1,6 +1,7 @@
 use epub::doc::EpubDoc;
 use html_parser::{Dom, Result};
 use serde_json;
+use serde::{Serialize};
 
 pub fn format(value: String) -> String {
     let test = value.replace("\\n", "").replace("\\", "");
@@ -17,7 +18,8 @@ pub fn get_content(html: &String) -> Result<Vec<String>> {
     let mut contents = Vec::new();
 
     for i in 0..data.len() {
-        if data[i]["classes"][0] == "calibre8" {
+        let kind = &data[i]["classes"][0];
+        if (kind == "calibre8" || kind == "calibre6") {
             let line = data[i + 1].to_string();
             let formatted = format(line.clone());
             contents.push(formatted);
@@ -42,6 +44,10 @@ pub fn get_book(path: &str) -> Vec<Vec<String>> {
     }
 
     chapters
+}
+
+pub fn store_as_json(chapters: Vec<Vec<String>>) {
+    println!("test run");
 }
 
 pub fn main() {

@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { open } from "@tauri-apps/api/dialog";
 import { invoke } from "@tauri-apps/api/tauri";
-import { copyFile, BaseDirectory } from '@tauri-apps/api/fs';
 import "./App.css";
 
 function App() {
   const [text, setText] = useState("");
+  const [chapter, setChapter] = useState("");
+  let i = 23;
+
+  async function get_chapter(index: number) {
+    setChapter(await invoke("abc", { index }));
+    i++;
+  }
   
   async function show_Text() {
     try {
@@ -24,11 +30,13 @@ function App() {
 
   return (
     <div className="container">
-      <div className="menu">
-        menu
+      <div className="menu" onClick={() => get_chapter(24)}>
+      </div>
+      <div className="curtain">
+        
       </div>
       <div className="reader">
-        reader
+        {chapter}
       </div>
     </div>
   );

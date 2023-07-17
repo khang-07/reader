@@ -8,6 +8,21 @@ use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 mod myepub;
 
+// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+#[tauri::command]
+fn greet(name: &str) -> String {
+    format!("Hello, {}! You've been greeted from Rust!", name)
+}
+
+#[tauri::command]
+fn abc(index: i64) -> String {
+    let chapters = myepub::get_book("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
+    let i = (index + 2) as usize; // chapter 1 is index1 and not index0
+    let text = chapters[i].join(" ");
+    println!("{:?}", chapters[i]);
+    text
+}
+
 pub trait WindowExt {
     #[cfg(target_os = "macos")]
     fn set_transparent_titlebar(&self, transparent: bool);
@@ -46,15 +61,9 @@ impl<R: Runtime> WindowExt for Window<R> {
     }
 }
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
 fn main() { 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
+        .invoke_handler(tauri::generate_handler![abc])
         .setup(|app| {
             let window = app.get_window("main").unwrap();
 
