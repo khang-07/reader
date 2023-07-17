@@ -4,21 +4,41 @@
   line-height: 24px;
   font-weight: 400;
 
+  background: rgba(255, 255, 255, 0.025);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  background: transparent;
-  backdrop-filter: blur(15px); /* using radius: Option<f64> for vib instead */
+  margin: 2vh;
+  width: calc(100vw - 4vh);
+  height: 96vh;
+  display: flex;
+
+  backdrop-filter: blur(25px); /* using radius: Option<f64> for vib instead */
+}
+
+.menu {
+  background-color: lightsalmon;
+  backdrop-filter: blur(20px);
+}
+
+.reader {
+  backdrop-filter: blur(0px);
+  border-radius: 10px;
+}
+
+.reader:hover {
+  background: rgba(128, 128, 128, 0.5);
 }
 
 .container {
   margin: 0;
-  padding-top: 10vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
   justify-content: center;
   text-align: center;
 }

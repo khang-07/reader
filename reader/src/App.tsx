@@ -23,9 +23,16 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <button onClick={() => show_Text()}>{text}</button>
+<div className="container">
+      {/* <div className="menu"></div>
+      <div className="reader">
+        the color of this should change according to the background
+      </div>
+      <div className="reader">
+        the color of this should change according to the background
+  </div> */}
     </div>
+
   );
 }
 
