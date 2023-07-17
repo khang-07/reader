@@ -23,16 +23,14 @@ function App() {
   }
 
   return (
-<div className="container">
-      {/* <div className="menu"></div>
-      <div className="reader">
-        the color of this should change according to the background
+    <div className="container">
+      <div className="menu">
+        menu
       </div>
       <div className="reader">
-        the color of this should change according to the background
-  </div> */}
+        reader
+      </div>
     </div>
-
   );
 }
 
