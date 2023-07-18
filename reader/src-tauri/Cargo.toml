@@ -20,6 +20,9 @@ html_parser = "0.7.0"
 serde_json = "1.0.102"
 window-vibrancy = "0.4.0"
 cocoa = "0.25.0"
+html2text = "0.6.0"
+serde_with = "3.1.0"
+regex = "1.9.1"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

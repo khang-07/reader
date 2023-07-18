@@ -1,57 +1,85 @@
 use epub::doc::EpubDoc;
 use html_parser::{Dom, Result};
-use serde_json;
-use serde::{Serialize};
+use serde_json::{self, json};
+use html2text;
+use serde::{Serialize, Deserialize};
+use regex::Regex;
+use std::{fs, io::BufReader, fmt::format};
+use std::io;
 
-pub fn format(value: String) -> String {
-    let test = value.replace("\\n", "").replace("\\", "");
-    let mut chars = test.chars();
-    chars.next();
-    chars.next_back();
-    chars.as_str().to_string()
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Chapter {
+    title: String,
+    content: Vec<Vec<String>>
 }
 
-pub fn get_content(html: &String) -> Result<Vec<String>> {
-    let json = Dom::parse(&html)?.to_json_pretty()?;
-    let result: serde_json::Value = serde_json::from_str(&json)?;
-    let data = &result["children"][0]["children"][1]["children"].as_array().unwrap();
-    let mut contents = Vec::new();
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Book {
+    title: String,
+    content: Vec<String>
+}
 
-    for i in 0..data.len() {
-        let kind = &data[i]["classes"][0];
-        if (kind == "calibre8" || kind == "calibre6") {
-            let line = data[i + 1].to_string();
-            let formatted = format(line.clone());
-            contents.push(formatted);
+pub fn get_chapter(html: &String) -> Result<Chapter> {
+    let content_html = html;
+    let content_bytes: &[u8] = content_html.as_bytes();
+    let content: String = html2text::from_read(&content_bytes[..], 10000);
+    let content_paragraphs = content.split("\n\n\n").collect::<Vec<&str>>();
+    let mut content_sentences = Vec::new();
+
+    for paragraph in content_paragraphs {
+        // The last sentence in a paragraph (vector of sentences) will have a period.
+        // The last word in a chapter is a "\n"
+        let sentences = paragraph.split(". ").collect::<Vec<&str>>();
+        let mut sentences_string = Vec::new();
+
+        for sentence in sentences {
+            sentences_string.push(sentence.to_string());
         }
+        content_sentences.push(sentences_string);
     }
 
-    contents.pop();
+    let title = &content_sentences[0][0];
+    let re = Regex::new(r"[^A-Za-z0-9 ]").unwrap();
+    let title_clean = &re.replace_all(&title, " ").to_string();
+    let title_trim = title_clean.trim().to_string();
 
-    Ok(contents)
+    let chapter = Chapter {
+        title: title_trim,
+        content: content_sentences
+    };
+
+    Ok(chapter)    
 }
 
-pub fn get_book(path: &str) -> Vec<Vec<String>> {
+pub fn book_to_json(path: &str) {
     let mut doc = EpubDoc::new(path).unwrap();
-    let mut chapters = Vec::new();
     let chapter_count = doc.get_num_pages();
 
-    for i in 1..chapter_count {
+    // skip content.opf and title page
+    let _ = doc.go_next();
+    let _ = doc.go_next();
+
+    let mut prejsons = Vec::new();
+
+    for i in 0..chapter_count {
         let html = doc.get_current_str().unwrap();
-        chapters.push(get_content(&html).unwrap());
+        let chapter = get_chapter(&html).unwrap();
+        let prejson = format!("\"{}\" : [{}]", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
+        prejsons.push(prejson);
         let _ = doc.go_next();
-        println!("{i}");
     }
 
-    chapters
-}
+    let test = format!("{{ \n{} \n}}", prejsons.join(",\n"));
+    println!("{}", prejsons[0]);
 
-pub fn store_as_json(chapters: Vec<Vec<String>>) {
-    println!("test run");
+    let _ = fs::write("foo.json", test);
 }
 
 pub fn main() {
     // building from ./foo, so need to add /src/
-    let chapters = get_book("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
-    println!("{:?}", chapters[2]);
+    // let chapters = get_book("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
+    // println!("{:?}", chapters[2]);
+
+    let path = "/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub";
+    book_to_json(path);
 }

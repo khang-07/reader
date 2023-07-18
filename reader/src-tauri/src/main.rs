@@ -15,12 +15,8 @@ fn greet(name: &str) -> String {
 }
 
 #[tauri::command]
-fn abc(index: i64) -> String {
-    let chapters = myepub::get_book("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
-    let i = (index + 2) as usize; // chapter 1 is index1 and not index0
-    let text = chapters[i].join(" ");
-    println!("{:?}", chapters[i]);
-    text
+fn beep() {
+    myepub::book_to_json("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
 }
 
 pub trait WindowExt {
@@ -63,7 +59,7 @@ impl<R: Runtime> WindowExt for Window<R> {
 
 fn main() { 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![abc])
+        .invoke_handler(tauri::generate_handler![beep])
         .setup(|app| {
             let window = app.get_window("main").unwrap();
 
@@ -71,6 +67,8 @@ fn main() {
             let _ = apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None);
             let _ = &window.set_transparent_titlebar(true);
             // .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
+
+            println!("epub loaded");
 
             Ok(())
         })

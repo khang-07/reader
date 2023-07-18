@@ -8,9 +8,8 @@ function App() {
   const [chapter, setChapter] = useState("");
   let i = 23;
 
-  async function get_chapter(index: number) {
-    setChapter(await invoke("abc", { index }));
-    i++;
+  async function load_book() {
+    await invoke("beep");
   }
   
   async function show_Text() {
@@ -30,7 +29,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="menu" onClick={() => get_chapter(24)}>
+      <div className="menu" onClick={() => load_book()}>
       </div>
       <div className="curtain">
         
