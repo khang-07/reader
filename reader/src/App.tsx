@@ -1,3 +1,5 @@
+"use-strict";
+
 import { useState } from "react";
 import { open } from "@tauri-apps/api/dialog";
 import { invoke } from "@tauri-apps/api/tauri";

@@ -4,9 +4,10 @@
 use tauri::{Runtime, Window, Manager, WindowBuilder};
 use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 use cocoa::appkit::{NSWindow, NSWindowStyleMask};
-use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
+use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
 mod myepub;
+mod myreader;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -17,6 +18,7 @@ fn greet(name: &str) -> String {
 #[tauri::command]
 fn beep() {
     myepub::book_to_json("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
+    myreader::main();
 }
 
 pub trait WindowExt {
@@ -67,8 +69,6 @@ fn main() {
             let _ = apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None);
             let _ = &window.set_transparent_titlebar(true);
             // .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
-
-            println!("epub loaded");
 
             Ok(())
         })

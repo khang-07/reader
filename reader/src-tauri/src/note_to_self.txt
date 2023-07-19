@@ -1,0 +1,2 @@
+you need to press commit to main on github desktop
+then press sync changes in vs code

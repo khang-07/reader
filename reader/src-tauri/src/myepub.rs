@@ -62,7 +62,7 @@ pub fn book_to_json(path: &str) {
 
     let mut prejsons = Vec::new();
 
-    for i in 0..chapter_count {
+    for i in 0..2 { // chapter_count {
         let html = doc.get_current_str().unwrap();
         let chapter = get_chapter(&html).unwrap();
         let prejson = format!("\"{}\" : [{}]", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
@@ -75,7 +75,8 @@ pub fn book_to_json(path: &str) {
     // let rel_path = PathBuf::from("../src/");
     // let abs_path =  fs::canonicalize(&srcdir);
 
-    let _ = fs::write("../src/foo.json", test);
+    let _ = fs::write("../src-book/foo.json", test);
+    println!("epub loaded");
 }
 
 pub fn main() {
