@@ -6,6 +6,7 @@ use serde::{Serialize, Deserialize};
 use regex::Regex;
 use std::{fs, io::BufReader, fmt::format};
 use std::io;
+use std::path::PathBuf;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Chapter {
@@ -70,16 +71,14 @@ pub fn book_to_json(path: &str) {
     }
 
     let test = format!("{{ \n{} \n}}", prejsons.join(",\n"));
-    println!("{}", prejsons[0]);
 
-    let _ = fs::write("foo.json", test);
+    // let rel_path = PathBuf::from("../src/");
+    // let abs_path =  fs::canonicalize(&srcdir);
+
+    let _ = fs::write("../src/foo.json", test);
 }
 
 pub fn main() {
-    // building from ./foo, so need to add /src/
-    // let chapters = get_book("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
-    // println!("{:?}", chapters[2]);
-
     let path = "/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub";
     book_to_json(path);
 }

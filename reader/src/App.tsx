@@ -6,10 +6,10 @@ import "./App.css";
 function App() {
   const [text, setText] = useState("");
   const [chapter, setChapter] = useState("");
-  let i = 23;
 
   async function load_book() {
     await invoke("beep");
+    console.log("hi");
   }
   
   async function show_Text() {
