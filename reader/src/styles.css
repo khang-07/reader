@@ -12,11 +12,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  margin: 2vh;
-  margin-top: 0;
   /* margin-top: 28px; added seperately for menu28px, reader2vh */
-  width: calc(100vw - 4vh);
-  height: 98vh; /* - 28px - 2vh);*/
+  /* pretty much equivalent to 100% */
+  width: 100vw;
+  height: 100vh;
   display: flex;
 
   background: rgba(32, 32, 32, 0.05);
@@ -25,8 +24,6 @@
 }
 
 .menu {
-  margin-top: 28px;
-  width: calc(20% - 2.5px);
   backdrop-filter: blur(20px);
   border-radius: 10px;
 }
@@ -46,9 +43,6 @@
 }
 
 .reader {
-  margin-top: 2vh;
-  padding: 5vh;
-  width: calc(80% - 2.5px);
   background: rgba(12, 12, 12, 0.75);
   backdrop-filter: blur(20px);
   border-radius: 10px;

@@ -11,8 +11,8 @@ mod myreader;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
+fn print_from_back(message: &str) {
+    println!("Frontend Print: {}", message);
 }
 
 #[tauri::command]
@@ -61,7 +61,7 @@ impl<R: Runtime> WindowExt for Window<R> {
 
 fn main() { 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![beep])
+        .invoke_handler(tauri::generate_handler![beep, print_from_back])
         .setup(|app| {
             let window = app.get_window("main").unwrap();
 

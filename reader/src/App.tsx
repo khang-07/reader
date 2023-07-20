@@ -7,14 +7,14 @@ import "./App.css";
 
 function App() {
   const [text, setText] = useState("");
-  const [chapter, setChapter] = useState("");
+  const [chapter, setChapter] = useState(""); 
 
   async function load_book() {
     await invoke("beep");
-    console.log("hi");
+    await invoke("print_from_back", { message: "hi from front" });
   }
   
-  async function show_Text() {
+  async function get_path() {
     try {
       const path = await open({
         multiple: false,
@@ -31,14 +31,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="menu" onClick={() => load_book()}>
-      </div>
-      <div className="curtain">
-        
-      </div>
-      <div className="reader">
-        {chapter}
-      </div>
+      hello
     </div>
   );
 }

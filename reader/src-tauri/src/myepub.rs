@@ -72,8 +72,8 @@ pub fn book_to_json(path: &str) {
 
     let test = format!("{{ \n{} \n}}", prejsons.join(",\n"));
 
-    // let rel_path = PathBuf::from("../src/");
-    // let abs_path =  fs::canonicalize(&srcdir);
+    // let rel_path = PathBuf::from("../src-book/foo.json");
+    // let abs_path =  fs::canonicalize(&rel_path);
 
     let _ = fs::write("../src-book/foo.json", test);
     println!("epub loaded");
