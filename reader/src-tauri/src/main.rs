@@ -1,7 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::{Runtime, Window, Manager, WindowBuilder};
+use tauri::{Runtime, Window, Manager, WindowBuilder, WindowEvent};
 use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 use cocoa::appkit::{NSWindow, NSWindowStyleMask};
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
@@ -71,6 +71,11 @@ fn main() {
             // .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
 
             Ok(())
+        })
+        .on_window_event(|e| {
+            if let WindowEvent::Resized(_) = e.event() {
+                println!("hi");
+            }
         })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

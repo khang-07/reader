@@ -13,25 +13,21 @@ function App() {
     await invoke("beep");
     await invoke("print_from_back", { message: "hi from front" });
   }
-  
-  async function get_path() {
-    try {
-      const path = await open({
-        multiple: false,
-        directory: false,
-        title: "Open File"
-      });
-
-      setText(path?.toString()!);
-
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
-    <div className="container">
-      hello
+    <div>
+      <div className="container">
+        <div className="menu">
+
+        </div>
+        <div className="curtain"></div>
+        <div className="test">
+          <div className="reader">
+            <p className="send">Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you</p>
+            <p className="receive">I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
