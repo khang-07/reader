@@ -21,11 +21,27 @@ function App() {
 
         </div>
         <div className="curtain"></div>
-        <div className="test">
           <div className="reader">
-            <p className="send">Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you Are you</p>
-            <p className="receive">I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am I am</p>
-          </div>
+            <div className="test">
+              <p className="send">être en rêve</p>
+              <p className="receive">夢の中でる</p>
+              <p className="send">i did your mom last night</p>
+              <p className="receive">vorrei daverro fare a</p>
+              <p className="send">我吃了你的米飯</p>
+              <p className="receive">ăn nhiều bánh ngọt</p>
+              <p className="send">être en rêve</p>
+              <p className="receive">夢の中でる</p>
+              <p className="send">i did your mom last night</p>
+              <p className="receive">vorrei daverro fare a</p>
+              <p className="send">我吃了你的米飯</p>
+              <p className="receive">ăn nhiều bánh ngọt</p>
+              <p className="send">être en rêve</p>
+              <p className="receive">夢の中でる</p>
+              <p className="send">i did your mom last night</p>
+              <p className="receive">vorrei daverro fare a</p>
+              <p className="send">我吃了你的米飯</p>
+              <p className="receive">ăn nhiều bánh ngọt</p>
+            </div>
         </div>
       </div>
     </div>
