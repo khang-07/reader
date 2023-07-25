@@ -16,9 +16,22 @@ fn print_from_back(message: &str) {
 }
 
 #[tauri::command]
-fn beep() {
+fn book_to_json() {
     myepub::book_to_json("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
-    myreader::main();
+}
+
+#[tauri::command]
+fn get_chapter_titles() -> Vec<String> {
+    book_to_json();
+    myreader::get_chapter_titles()
+}
+
+#[tauri::command]
+fn get_chapter(message: &str) -> Vec<Vec<String>> {
+    println!("Getting Chapter: {}", message);
+    let test = myreader::get_chapter("The Boy Named Crow");
+    println!("{:?}", test);
+    test
 }
 
 pub trait WindowExt {
@@ -61,7 +74,12 @@ impl<R: Runtime> WindowExt for Window<R> {
 
 fn main() { 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![beep, print_from_back])
+        .invoke_handler(tauri::generate_handler![
+            book_to_json, 
+            get_chapter_titles, 
+            print_from_back,
+            get_chapter
+        ])
         .setup(|app| {
             let window = app.get_window("main").unwrap();
 

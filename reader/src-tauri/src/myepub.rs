@@ -14,12 +14,6 @@ pub struct Chapter {
     content: Vec<Vec<String>>
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Book {
-    title: String,
-    content: Vec<String>
-}
-
 pub fn get_chapter(html: &String) -> Result<Chapter> {
     let content_html = html;
     let content_bytes: &[u8] = content_html.as_bytes();
@@ -62,10 +56,10 @@ pub fn book_to_json(path: &str) {
 
     let mut prejsons = Vec::new();
 
-    for i in 0..2 { // chapter_count {
+    for i in 0..chapter_count {
         let html = doc.get_current_str().unwrap();
         let chapter = get_chapter(&html).unwrap();
-        let prejson = format!("\"{}\" : [{}]", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
+        let prejson = format!("\"{}\" : {}", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
         prejsons.push(prejson);
         let _ = doc.go_next();
     }

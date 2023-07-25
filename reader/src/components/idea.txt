@@ -1,0 +1,6 @@
+take in book in vector form from io stream
+tbh i just want to read one chapter rn so just get 1 chapter from book[27]
+and then count number of paragraphs
+every other one send to make a recieve/sent paragraph compoennt
+which itself will count sentences and return a bunch of send elements
+for each sentence

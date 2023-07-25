@@ -1,4 +1,3 @@
-
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,8 +45,13 @@
   align-items: stretch;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  /* dumped over properties from container until it worked */
+  width: calc(100% - 200px); 
   overflow-y: scroll;
+  padding-left: calc(10px + 10px); 
+  padding-right: calc(10px + 10px); 
+  /* the message tail is 10px on left and right*/
+  /* an extra 10px just cuz i like the way it looks */
 }
 
 .reader::selection {
@@ -83,7 +87,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--page-background);
-  width: 50%;
+  width: 100%;
 }
 
 p {

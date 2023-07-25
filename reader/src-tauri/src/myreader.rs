@@ -1,23 +1,42 @@
 use std::fs::File;
 use serde_json;
+use serde::{Serialize, Deserialize};
+use alphanumeric_sort;
 
-pub fn get_book() -> serde_json::Map<std::string::String, serde_json::Value> {
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Chapter {
+    title: String,
+    content: Vec<Vec<String>>
+}
+
+pub fn get_chapter(chapter_title: &str) -> Vec<Vec<String>> {
+    let mut result = Vec::new();
     let file = File::open("../src-book/foo.json").unwrap();
     let json: serde_json::Value = serde_json::from_reader(file).unwrap();
     let test = json.as_object().unwrap();
-    test.clone()
+    for (title, content) in test {
+        if title == chapter_title {
+            println!("pee{}", title);
+            // println!("{:?}", serde_json::from_value::<Vec<Vec<String>>>(content.clone()).unwrap());
+            let result = serde_json::from_value::<Vec<Vec<String>>>(content.clone()).unwrap();
+            println!("{:?}", result);
+        }
+    }
+    result
+}
+
+pub fn get_chapter_titles() -> Vec<String> {
+    let mut result = Vec::new();
+    let file = File::open("../src-book/foo.json").unwrap();
+    let json: serde_json::Value = serde_json::from_reader(file).unwrap();
+    let test = json.as_object().unwrap();
+    for (title, content) in test {
+        result.push(title.to_string());
+    }
+    result.sort();
+    result
 }
 
 pub fn main() {
-    
-    /* for (title, content) in test {
-        println!("{}", title);
-        let t = content.as_array().unwrap();
-        println!("{:?}", t[0]);
-        // use input from main(a, b, c) to access chapter/paragraph/sentence
-        // for now focus on design : backend is good enough rn
-        // store hashmap somewhere? main.rs maybe
-    } */
-
     println!("worked");
 }

@@ -23,6 +23,7 @@ cocoa = "0.25.0"
 html2text = "0.6.0"
 serde_with = "3.1.0"
 regex = "1.9.1"
+alphanumeric-sort = "1.5.1"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
