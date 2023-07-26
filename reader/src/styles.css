@@ -13,8 +13,6 @@
   overflow: hidden;
   display: flex;
 
-  background-color: bisque;
-
   --send-bg: #0d84ff;
   --send-color: white;
   --receive-bg: #3b3b3d;
@@ -91,9 +89,10 @@
 }
 
 p {
-  max-width: 255px;
+  max-width: 40%;
   word-wrap: break-word;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  margin-top: 0px;
   line-height: 24px;
   position: relative;
 	padding: 10px 20px;

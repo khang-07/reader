@@ -10,19 +10,19 @@ pub struct Chapter {
 }
 
 pub fn get_chapter(chapter_title: &str) -> Vec<Vec<String>> {
-    let mut result = Vec::new();
+    let result = vec![vec!["aw sharts".to_string()]];
     let file = File::open("../src-book/foo.json").unwrap();
     let json: serde_json::Value = serde_json::from_reader(file).unwrap();
     let test = json.as_object().unwrap();
     for (title, content) in test {
         if title == chapter_title {
-            println!("pee{}", title);
+            println!("From myreader.rs: {}", title);
             // println!("{:?}", serde_json::from_value::<Vec<Vec<String>>>(content.clone()).unwrap());
             let result = serde_json::from_value::<Vec<Vec<String>>>(content.clone()).unwrap();
-            println!("{:?}", result);
+            return result;
         }
     }
-    result
+    return result;
 }
 
 pub fn get_chapter_titles() -> Vec<String> {

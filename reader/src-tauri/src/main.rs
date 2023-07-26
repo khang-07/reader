@@ -22,15 +22,15 @@ fn book_to_json() {
 
 #[tauri::command]
 fn get_chapter_titles() -> Vec<String> {
-    book_to_json();
     myreader::get_chapter_titles()
 }
 
 #[tauri::command]
-fn get_chapter(message: &str) -> Vec<Vec<String>> {
-    println!("Getting Chapter: {}", message);
-    let test = myreader::get_chapter("The Boy Named Crow");
-    println!("{:?}", test);
+fn get_chapter(title: &str) -> Vec<Vec<String>> {
+    println!("Getting Chapter: {}", title);
+    let mut test = myreader::get_chapter(title);
+    test.pop();
+    test.remove(0);
     test
 }
 
