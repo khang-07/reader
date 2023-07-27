@@ -1,10 +1,11 @@
 "use-strict";
 
-import { useState } from "react";
+import { useState, FC } from "react";
 import { open } from "@tauri-apps/api/dialog";
 import { invoke } from "@tauri-apps/api/tauri";
 import Chapter_Block from "./components/chapter-block";
 import Message from "./components/message"
+import Reader from "./components/reader"
 import "./App.css";
 
 function App() {
@@ -27,12 +28,17 @@ function App() {
   return (
     <div>
       <div className="container">
-        <div className="menu" onClick={() => { load_chapter(); load_chapter_titles() }}>
-        </div>
-        <div className="curtain"></div>
-          <div className="reader">
-            <div className="test">
-              <Chapter_Block chapter={chapter}></Chapter_Block>
+        <div className="menu" onClick={() => { load_chapter(); load_chapter_titles() }}></div>
+          <div className="reader-wrapper">
+            <div className="top-bar">
+              <div className="to-name">To: </div>
+              <div className="name">wassup</div>
+            </div>
+            <Reader chapter={chapter}></Reader>
+            <div className="bot-bar">
+              <div className="app-store"></div>
+              <div className="search"></div>
+              <div className="emoji"></div>
             </div>
         </div>
       </div>

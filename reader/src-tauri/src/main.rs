@@ -84,7 +84,7 @@ fn main() {
             let window = app.get_window("main").unwrap();
 
             #[cfg(target_os = "macos")]
-            let _ = apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None);
+            let _ = apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, Some(16.0));
             let _ = &window.set_transparent_titlebar(true);
             // .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
 

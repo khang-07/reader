@@ -13,7 +13,7 @@
   overflow: hidden;
   display: flex;
 
-  --send-bg: #0d84ff;
+  --send-bg: #0f85fa;
   --send-color: white;
   --receive-bg: #3b3b3d;
   --receive-text: white;
@@ -21,56 +21,51 @@
 }
 
 .menu {
-  width: 195px;
+  min-width: 320px;
   flex-direction: column;
-  overflow-y: scroll;
+  background: rgba(56, 52, 52, 0.6);
+  backdrop-filter: blur(20px);
 }
 
-.curtain {
-  width: 5px;
-  border-radius: 10px;
-  transition: background-color 500ms ease-in-out 100ms;
-}
-
-.curtain:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+.reader-wrapper {
+  display: flex;
+  position: relative;
+  width: auto;
 }
 
 .reader {
   background: var(--page-background);
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* column for the To: 阿天 and iMessage send */
   align-items: stretch;
   justify-content: center;
   text-align: center;
   /* dumped over properties from container until it worked */
-  width: calc(100% - 200px); 
   overflow-y: scroll;
-  padding-left: calc(10px + 10px); 
-  padding-right: calc(10px + 10px); 
   /* the message tail is 10px on left and right*/
-  /* an extra 10px just cuz i like the way it looks */
+  /* an extra 5px just cuz i like the way it looks */
 }
 
-.reader::selection {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-.reader::-webkit-scrollbar {
+.reader-wrapper::-webkit-scrollbar, .reader::-webkit-scrollbar, .right::-webkit-scrollbar, p::-webkit-scrollbar {
   display: none;
+}
+
+p::selection {
+  color: rgba(255, 0, 0, 0.85);
 }
 
 .container {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* row of text messages */
   align-items: stretch;
   justify-content: center;
   text-align: center;
   width: 100%;
   height: 100%;
   position: absolute;
+  border-radius: 10px;
 }
 
 .row {
@@ -78,14 +73,17 @@
   justify-content: center;
 }
 
-.test {
+.message-wrapper {
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 20px;
   letter-spacing: -0.24px;
   display: flex;
   flex-direction: column;
   background-color: var(--page-background);
-  width: 100%;
+  width: calc(100% - 30px);
+  height: 100%;
+  padding-left: calc(10px + 5px); 
+  padding-right: calc(10px + 5px); 
 }
 
 p {
@@ -157,6 +155,78 @@ p:after {
   background-color: var(--page-background);
   border-bottom-right-radius: 10px;
   z-index: 1;
+}
+
+.top-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+  height: 50px;
+  /* padding: 15px; */
+  background: rgba(51,51,51,0.9);
+  z-index: 2;
+  line-height: calc(24px * 7/10);
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: calc(20px * 7/10);
+  letter-spacing:calc(-0.24px * 7/10);
+  backdrop-filter: blur(10px);
+}
+
+.to-name {
+  color: #959695;
+  margin-left: 20px;
+}
+
+.name {
+  color: white;
+  margin-left: 2px;
+  width: fit-content;
+  height: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+}
+
+.name:hover {
+  background: #15406b;
+}
+
+.bot-bar {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  bottom: 0px;
+  width: calc(100% - 2 * 15px);
+  height: calc(60px - 2 * 15px);
+  background: rgba(250, 182, 197, 0.75);
+  z-index: 2;
+  padding: 15px;
+}
+
+.app-store {
+  margin-right: 15px;
+  height: 20px;
+  width: 30px;
+  background: rgba(50, 100, 255, 0.85);
+}
+
+.emoji {
+  margin-left: 15px;
+  height: 20px;
+  width: 20px;
+  background: rgba(50, 100, 255, 0.85);
+}
+
+.search {
+  flex-grow: 1;
+  height: 30px;
+  background: rgba(50, 100, 255, 0.85);
 }
 
 
