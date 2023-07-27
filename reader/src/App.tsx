@@ -12,7 +12,7 @@ function App() {
   const [text, setText] = useState("");
   const [chapter, setChapter] = useState([["aw", "sharts"], ["no", "chapter"]]); 
   const [titles, setTitles] = useState(["aw sharts no titles"]);
-  const [oui, setOui] = useState(34);
+  const [oui, setOui] = useState(0);
 
   async function load_chapter_titles() {
     setTitles(await invoke("get_chapter_titles"));

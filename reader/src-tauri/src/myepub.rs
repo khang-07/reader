@@ -14,7 +14,7 @@ pub struct Chapter {
     content: Vec<Vec<String>>
 }
 
-pub fn get_chapter(html: &String) -> Result<Chapter> {
+pub fn get_chapter(html: &String, index: usize) -> Result<Chapter> {
     let content_html = html;
     let content_bytes: &[u8] = content_html.as_bytes();
     let content: String = html2text::from_read(&content_bytes[..], 10000);
@@ -33,10 +33,13 @@ pub fn get_chapter(html: &String) -> Result<Chapter> {
         content_sentences.push(sentences_string);
     }
 
-    let title = &content_sentences[0][0];
-    let re = Regex::new(r"[^A-Za-z0-9 ]").unwrap();
-    let title_clean = &re.replace_all(&title, " ").to_string();
-    let title_trim = title_clean.trim().to_string();
+    // let title = &content_sentences[0][0];
+    // let re = Regex::new(r"[^A-Za-z0-9 ]").unwrap();
+    // let title_clean = &re.replace_all(&title, " ").to_string();
+    // let title_trim = title_clean.trim().to_string();
+
+    let title_trim = format!("Chapter {}", index);
+    println!("{}", title_trim);
 
     let chapter = Chapter {
         title: title_trim,
@@ -58,7 +61,8 @@ pub fn book_to_json(path: &str) {
 
     for i in 0..chapter_count {
         let html = doc.get_current_str().unwrap();
-        let chapter = get_chapter(&html).unwrap();
+        let chapter = get_chapter(&html, i).unwrap();
+        println!("from{}", chapter.title);
         let prejson = format!("\"{}\" : {}", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
         prejsons.push(prejson);
         let _ = doc.go_next();
@@ -74,6 +78,6 @@ pub fn book_to_json(path: &str) {
 }
 
 pub fn main() {
-    let path = "/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub";
+    let path = "/Users/khangnguyen/Documents/Books/Breasts and Eggs.epub";
     book_to_json(path);
 }

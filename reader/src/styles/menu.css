@@ -1,0 +1,6 @@
+.menu {
+    min-width: 320px;
+    flex-direction: column;
+    background: rgba(56, 52, 52, 0.6);
+    backdrop-filter: blur(20px);
+  }

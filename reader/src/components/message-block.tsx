@@ -12,8 +12,9 @@ interface msgBlockData {
 const Message_Block: FC<msgBlockData> = (props) => {
   let block = [];
   for (let i = 0; i < props.content.length; i++) {
+    let moi = (i == props.content.length - 1) ? true : false;
     block.push(
-    <Message text={props.content[i]} type={props.type}></Message>);
+      <Message key={i} text={props.content[i]} type={props.type} ending={moi}></Message>);
   }
   return (
     block

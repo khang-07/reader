@@ -10,8 +10,9 @@ interface msgData {
 // FC<msgData> ~ Function Component w/ parameter msgData
 
 const Message: FC<msgData> = (props) => {
+  let terminal = [props.type, "-end"].join("");
   return (
-    <p className={props.type}>
+    <p className={`${props.ending ? terminal : props.type}`}>
       {props.text}
     </p>
   );

@@ -1,0 +1,48 @@
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  /* margin-top: 28px; added seperately for menu28px, reader2vh */
+  /* pretty much equivalent to 100% */
+  width: 100%;
+  height: 100%;
+  /* disables the thing where content moves out of screen when scroll*/
+  overflow: hidden;
+  display: flex;
+
+  --send-bg: #0f85fa;
+  --send-color: white;
+  --receive-bg: #3b3b3d;
+  --receive-text: white;
+  --page-background: #1e1e1e;
+}
+
+.reader-wrapper::-webkit-scrollbar, .reader::-webkit-scrollbar, .right::-webkit-scrollbar, p::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row; /* row of text messages */
+  align-items: stretch;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+}

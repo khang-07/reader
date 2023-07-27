@@ -17,7 +17,7 @@ fn print_from_back(message: &str) {
 
 #[tauri::command]
 fn book_to_json() {
-    myepub::book_to_json("/Users/khangnguyen/Code/testing epub rust/foo/src/kafka.epub");
+    myepub::book_to_json("/Users/khangnguyen/Documents/Books/Breasts and Eggs.epub");
 }
 
 #[tauri::command]
@@ -29,8 +29,8 @@ fn get_chapter_titles() -> Vec<String> {
 fn get_chapter(title: &str) -> Vec<Vec<String>> {
     println!("Getting Chapter: {}", title);
     let mut test = myreader::get_chapter(title);
-    test.pop();
-    test.remove(0);
+    // test.pop();
+    // test.remove(0);
     test
 }
 
@@ -88,6 +88,7 @@ fn main() {
             let _ = &window.set_transparent_titlebar(true);
             // .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
 
+            myepub::main();
             Ok(())
         })
         .on_window_event(|e| {

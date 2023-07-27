@@ -17,7 +17,7 @@ const Chapter_Block: FC<chapterBlockData> = (props) => {
       woof = "receive";
     }
     chapter_block.push(
-      <Message_Block content={props.chapter[i]} type={woof}></Message_Block>);
+      <Message_Block key={i} content={props.chapter[i]} type={woof}></Message_Block>);
   }
   return (
     chapter_block
