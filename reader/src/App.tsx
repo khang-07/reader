@@ -12,6 +12,7 @@ function App() {
   const [text, setText] = useState("");
   const [chapter, setChapter] = useState([["aw", "sharts"], ["no", "chapter"]]); 
   const [titles, setTitles] = useState(["aw sharts no titles"]);
+  const [oui, setOui] = useState(34);
 
   async function load_chapter_titles() {
     setTitles(await invoke("get_chapter_titles"));
@@ -20,9 +21,10 @@ function App() {
   }
 
   async function load_chapter() {
-    let arf: string[][] = await invoke("get_chapter", { title: "Chapter 34" });
+    setOui(oui + 1);
+    let arf: string[][] = await invoke("get_chapter", { title: ["Chapter", oui].join(" ") });
     setChapter(arf);
-    console.log(chapter);
+    console.log(oui);
   }
 
   return (
@@ -32,7 +34,7 @@ function App() {
           <div className="reader-wrapper">
             <div className="top-bar">
               <div className="to-name">To: </div>
-              <div className="name">wassup</div>
+              <div className="name">{["Chapter", oui - 1].join(" ")}</div>
             </div>
             <Reader chapter={chapter}></Reader>
             <div className="bot-bar">
