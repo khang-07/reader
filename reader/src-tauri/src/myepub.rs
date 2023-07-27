@@ -18,13 +18,13 @@ pub fn get_chapter(html: &String, index: usize) -> Result<Chapter> {
     let content_html = html;
     let content_bytes: &[u8] = content_html.as_bytes();
     let content: String = html2text::from_read(&content_bytes[..], 10000);
-    let content_paragraphs = content.split("\n\n\n").collect::<Vec<&str>>();
+    let content_paragraphs = content.split(". ").collect::<Vec<&str>>();
     let mut content_sentences = Vec::new();
 
     for paragraph in content_paragraphs {
         // The last sentence in a paragraph (vector of sentences) will have a period.
         // The last word in a chapter is a "\n"
-        let sentences = paragraph.split(". ").collect::<Vec<&str>>();
+        let sentences = paragraph.split("\"").collect::<Vec<&str>>();
         let mut sentences_string = Vec::new();
 
         for sentence in sentences {
