@@ -1,4 +1,6 @@
 .message-wrapper {
+  /* top bar + match msg spacing */
+  margin-top: 120px;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 20px;
   letter-spacing: -0.24px;
@@ -12,10 +14,10 @@
 }
 
 p {
-  max-width: 40%;
+  max-width: 42.5%;
   word-wrap: break-word;
   margin-bottom: 10px;
-  margin-top: 0px;
+  margin-top: 10px;
   line-height: 24px;
   position: relative;
   padding: 10px 18px;

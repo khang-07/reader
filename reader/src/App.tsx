@@ -4,8 +4,10 @@ import { useState, FC } from "react";
 import { open } from "@tauri-apps/api/dialog";
 import { invoke } from "@tauri-apps/api/tauri";
 import Chapter_Block from "./components/chapter-block";
-import Message from "./components/message"
-import Reader from "./components/reader"
+import Message from "./components/message";
+import Top_Bar from "./components/top-bar";
+import Bottom_Bar from "./components/bottom-bar";
+import Reader from "./components/reader";
 import "./App.css";
 
 function App() {
@@ -30,18 +32,11 @@ function App() {
   return (
     <div>
       <div className="container">
-        <div className="menu" onClick={() => { load_chapter(); load_chapter_titles() }}></div>
+        <div className="menu" onClick={() => { load_chapter() }}></div>
           <div className="reader-wrapper">
-            <div className="top-bar">
-              <div className="to-name">To: </div>
-              <div className="name">{["Chapter", oui - 1].join(" ")}</div>
-            </div>
+            <Top_Bar index={oui}></Top_Bar>
             <Reader chapter={chapter}></Reader>
-            <div className="bot-bar">
-              <div className="switch"></div>
-              <input className="search" placeholder="iMessage"></input>
-              <div className="emoji"></div>
-            </div>
+            <Bottom_Bar></Bottom_Bar>
         </div>
       </div>
     </div>
