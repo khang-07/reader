@@ -69,30 +69,59 @@
     background: rgba(0, 0, 0, 0);
 }
 
-.facetime {
+.facetime-wrapper {
   margin: 5px;
   position: absolute;
-  right: calc(20px + 20px + 15px);
+  /* 15px from border; 16px is info size, 15px default spacing, 1px for padding account */
+  right: calc(15px + 16px + 15px + 1px);
   height: 14px;
   width: 20px;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 500ms ease-in-out 0ms;
+  border-radius: 7.5px;
   /* background: rgba(255, 145, 145, 0.75); */
+}
+
+.facetime-wrapper:hover {
+  background: rgba(100,100,100,0.25);
+}
+
+.facetime {
+  height: 14px;
+  width: 20px;
   background-image: url("../assets/dark/video.svg");
   background-size: contain;
 }
 
-.info {
-  margin: 5px;
+.info-wrapper {
   position: absolute;
-  right: calc(20px);
-  height: 20px;
-  width: 20px;
+  right: calc(15px);
+  height: 16px;
+  width: 16px;
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 500ms ease-in-out 0ms;
+  border-radius: 7.5px;
   /* background: rgba(255, 145, 145, 0.75); */
-  background-image: url("../assets/dark/info.circle.svg");
-  background-size: contain;
+  /* background-image: url("../assets/dark/info.circle.svg");
+  background-size: contain; */
 }
 
-.info:hover, .facetime:hover {
-  background: rgba(65,65,63,0.75);
+.info-wrapper:hover {
+  background: rgba(100,100,100,0.25);
+}
+
+.info {
+  /* 15px looks weird idk */
+  height: 16px;
+  width: 16px;
+  background-image: url("../assets/dark/info.circle.svg");
+  background-size: contain;
 }
 
 /* BOTTOM BAR */
@@ -114,7 +143,8 @@
 }
   
 .switch {
-    margin-right: 15px;
+    /* this makes it look better bc of the border added width */
+    margin-right: 12px;
     height: 20px;
     width: 20px;
     /* background: rgba(255, 145, 145, 0.75); */
@@ -123,7 +153,8 @@
 }
   
 .emoji {
-    margin-left: 15px;
+    /* this makes it look better bc of the border added width */
+    margin-left: 12px;
     height: 20px;
     width: 20px;
     /* background: rgba(145, 145, 255, 0.75); */

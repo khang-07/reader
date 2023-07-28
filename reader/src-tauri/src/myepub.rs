@@ -71,6 +71,6 @@ pub fn book_to_json(path: &str) {
 }
 
 pub fn main() {
-    let path = "/Users/khangnguyen/Documents/Books/Inferno.epub";
+    let path = "/Users/khangnguyen/Documents/Books/The Myth of Sisyphus.epub";
     book_to_json(path);
 }
