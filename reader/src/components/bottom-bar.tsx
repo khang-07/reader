@@ -1,7 +1,12 @@
 import { FC } from "react";
 import "../styles.css";
 
-const Bottom_Bar: FC = () => {
+interface bottomBarData {
+  handle?: Function;
+  // figure out how to submit chapter upon click
+}
+
+const Bottom_Bar: FC<bottomBarData> = (props) => {
   return (
     <div className="bot-bar">
         <div className="switch"></div>
