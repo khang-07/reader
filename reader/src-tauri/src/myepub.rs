@@ -1,12 +1,9 @@
 use epub::doc::EpubDoc;
-use html_parser::{Dom, Result};
-use serde_json::{self, json};
+use html_parser::{Result};
+use serde_json::{self};
 use html2text;
 use serde::{Serialize, Deserialize};
-use regex::Regex;
-use std::{fs, io::BufReader, fmt::format};
-use std::io;
-use std::path::PathBuf;
+use std::fs;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Chapter {
@@ -17,8 +14,8 @@ pub struct Chapter {
 pub fn get_chapter(html: &String, index: usize) -> Result<Chapter> {
     let content_html = html;
     let content_bytes: &[u8] = content_html.as_bytes();
-    let content: String = html2text::from_read(&content_bytes[..], 10000);
-    let content_paragraphs = content.split(". ").collect::<Vec<&str>>();
+    let content_string: String = html2text::from_read(&content_bytes[..], 10000);
+    let content_paragraphs = content_string.split(". ").collect::<Vec<&str>>();
     let mut content_sentences = Vec::new();
 
     for paragraph in content_paragraphs {
@@ -52,29 +49,25 @@ pub fn get_chapter(html: &String, index: usize) -> Result<Chapter> {
 pub fn book_to_json(path: &str) {
     let mut doc = EpubDoc::new(path).unwrap();
     let chapter_count = doc.get_num_pages();
+    let mut chapter_jsons = Vec::new();
 
     // skip content.opf and title page
     let _ = doc.go_next();
     let _ = doc.go_next();
 
-    let mut prejsons = Vec::new();
-
     for i in 0..chapter_count {
         let html = doc.get_current_str().unwrap();
         let chapter = get_chapter(&html, i).unwrap();
-        println!("from{}", chapter.title);
-        let prejson = format!("\"{}\" : {}", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
-        prejsons.push(prejson);
+        // println!("From myepub.rs: {}", chapter.title);
+        let chapter_json = format!("\"{}\" : {}", chapter.title, serde_json::to_string_pretty(&chapter.content).unwrap());
+        chapter_jsons.push(chapter_json);
         let _ = doc.go_next();
     }
 
-    let test = format!("{{ \n{} \n}}", prejsons.join(",\n"));
+    let final_json = format!("{{ \n{} \n}}", chapter_jsons.join(",\n"));
+    let _ = fs::write("../src-book/foo.json", final_json);
 
-    // let rel_path = PathBuf::from("../src-book/foo.json");
-    // let abs_path =  fs::canonicalize(&rel_path);
-
-    let _ = fs::write("../src-book/foo.json", test);
-    println!("epub loaded");
+    // println!("epub loaded");
 }
 
 pub fn main() {

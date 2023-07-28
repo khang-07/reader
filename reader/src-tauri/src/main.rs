@@ -1,8 +1,7 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use tauri::{Runtime, Window, Manager, WindowBuilder, WindowEvent};
-use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
+use tauri::{Runtime, Window, Manager, WindowEvent};
 use cocoa::appkit::{NSWindow, NSWindowStyleMask};
 use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 
@@ -28,10 +27,9 @@ fn get_chapter_titles() -> Vec<String> {
 #[tauri::command]
 fn get_chapter(title: &str) -> Vec<Vec<String>> {
     println!("Getting Chapter: {}", title);
-    let mut test = myreader::get_chapter(title);
+    myreader::get_chapter(title)
     // test.pop();
     // test.remove(0);
-    test
 }
 
 pub trait WindowExt {
@@ -89,6 +87,7 @@ fn main() {
             // .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
 
             myepub::main();
+            
             Ok(())
         })
         .on_window_event(|e| {

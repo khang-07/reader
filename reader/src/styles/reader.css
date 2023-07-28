@@ -1,7 +1,7 @@
 .reader-wrapper {
     display: flex;
     position: relative;
-    min-width: calc(100% - 320px);
+    min-width: 320px;
     margin-top: 50px;
 }
   
@@ -17,6 +17,8 @@
     min-width: calc(100% - 320px);
 }
 
+/* TOP BAR */
+
 .top-bar {
     position: fixed;
     display: flex;
@@ -29,8 +31,8 @@
     background: rgba(51,51,51,1);
     z-index: 2;
     line-height: calc(24px * 7/10);
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
-      font-size: calc(20px * 7/10);
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: calc(20px * 7/10);
     letter-spacing:calc(-0.24px * 7/10);
     backdrop-filter: blur(10px);
 }
@@ -67,6 +69,8 @@
 .name::selection, .to-name::selection {
     background: rgba(0, 0, 0, 0);
 }
+
+/* BOTTOM BAR */
   
 .bot-bar {
     position: absolute;
@@ -76,29 +80,52 @@
     bottom: 0px;
     width: calc(100% - 2 * 15px);
     height: calc(60px - 2 * 15px);
-    background: var(--receive-bg);
     z-index: 2;
     padding: 15px;
-    opacity: 0;
+    background: rgba(30, 30, 30, 0.75);
+    /* must use webkit for tauri */
+    -webkit-backdrop-filter: blur(20px);
     /* for now just for reading */
 }
   
-.app-store {
+.switch {
     margin-right: 15px;
     height: 20px;
-    width: 30px;
-    background: var(--page-background);
-  }
+    width: 20px;
+    /* background: rgba(255, 145, 145, 0.75); */
+    background-image: url("../assets/dark/moon.fill.svg");
+    background-size: contain;
+}
   
 .emoji {
     margin-left: 15px;
     height: 20px;
     width: 20px;
-    background: var(--page-background);
+    /* background: rgba(145, 145, 255, 0.75); */
+    background-image: url("../assets/dark/face.smiling.inverse.svg");
+    background-size: contain;
 }
-  
-  .search {
-    flex-grow: 1;
-    height: 30px;
-    background: var(--page-background);
+
+.search {
+  /* initial styling */
+  flex-grow: 1;
+  height: 30px;
+  border: 1px solid #545454;
+  border-radius: 12px;
+  padding-left: 10px;
+  display: flex; 
+  justify-content: left;
+  align-items: center;
+
+  /* text styling */
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.24px;
+  /* color: #545454; */
+  color: white;
+  background: rgba(0,0,0,0);
+  outline: none;
+  caret-color: white;
 }

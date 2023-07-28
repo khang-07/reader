@@ -38,8 +38,8 @@ function App() {
             </div>
             <Reader chapter={chapter}></Reader>
             <div className="bot-bar">
-              <div className="app-store"></div>
-              <div className="search"></div>
+              <div className="switch"></div>
+              <input className="search" placeholder="iMessage"></input>
               <div className="emoji"></div>
             </div>
         </div>
