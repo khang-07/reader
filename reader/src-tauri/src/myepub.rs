@@ -21,11 +21,14 @@ pub fn get_chapter(html: &String, index: usize) -> Result<Chapter> {
     for paragraph in content_paragraphs {
         // The last sentence in a paragraph (vector of sentences) will have a period.
         // The last word in a chapter is a "\n"
-        let sentences = paragraph.split("\"").collect::<Vec<&str>>();
+        let sentences = paragraph.split("\n").collect::<Vec<&str>>();
         let mut sentences_string = Vec::new();
 
+        // Get rid of empty sentences
         for sentence in sentences {
-            sentences_string.push(sentence.to_string());
+            if sentence.trim().is_empty() == false {
+                sentences_string.push(sentence.to_string());
+            }
         }
         content_sentences.push(sentences_string);
     }
@@ -71,6 +74,6 @@ pub fn book_to_json(path: &str) {
 }
 
 pub fn main() {
-    let path = "/Users/khangnguyen/Documents/Books/The Myth of Sisyphus.epub";
+    let path = "/Users/khangnguyen/Documents/Books/Breasts and Eggs.epub";
     book_to_json(path);
 }

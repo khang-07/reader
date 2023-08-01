@@ -1,17 +1,14 @@
 "use-strict";
 
-import { useState, FC } from "react";
+import { useState, useEffect, useRef } from "react";
 import { open } from "@tauri-apps/api/dialog";
 import { invoke } from "@tauri-apps/api/tauri";
-import Chapter_Block from "./components/chapter-block";
-import Message from "./components/message";
 import Top_Bar from "./components/top-bar";
 import Bottom_Bar from "./components/bottom-bar";
 import Reader from "./components/reader";
 import "./App.css";
 
 function App() {
-  const [text, setText] = useState("");
   const [chapter, setChapter] = useState([["aw", "sharts"], ["no", "chapter"]]); 
   const [titles, setTitles] = useState(["aw sharts no titles"]);
   const [oui, setOui] = useState(0);
@@ -29,13 +26,21 @@ function App() {
     console.log(oui);
   }
 
+  let hello = useRef(null);
+
+  useEffect(() => {
+    console.log("hello:");
+    hello?.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [oui]);
+
+
   return (
     <div>
       <div className="container">
-        <div className="menu" onClick={() => { load_chapter() }}></div>
+        <div className="menu" onClick={() => { load_chapter(); }}></div>
           <div className="reader-wrapper">
             <Top_Bar index={oui}></Top_Bar>
-            <Reader chapter={chapter}></Reader>
+            <Reader chapter={chapter} myRef={hello}></Reader>
             <Bottom_Bar></Bottom_Bar>
         </div>
       </div>
